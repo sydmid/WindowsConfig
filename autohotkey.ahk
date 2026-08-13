@@ -275,3 +275,23 @@ CapsLock & l:: Send "{Right}"
 !k:: Send "{WheelUp}"
 !;:: Send "{WheelRight}"
 #HotIf
+
+; =========================
+; Explorer-specific hotkeys
+; =========================
+#HotIf WinActive("ahk_class CabinetWClass")
+![:: Send "^+{Tab}"
+!]:: Send "^{Tab}"
+!w:: Send "^w"
+!e:: Send "^e"
+!p:: Send "^p"
+!t:: Send "^t"
+!n:: Send "^n"
+!l:: Send "^l"
+!r:: Send "^r"
+!+t:: Send "^+t"
+!h:: Send "{WheelLeft}"
+!j:: Send "{WheelDown}"
+!k:: Send "{WheelUp}"
+!;:: Send "{WheelRight}"
+#HotIf

@@ -9,7 +9,7 @@ SetWorkingDir A_ScriptDir
 ; =========================
 preWrittenText := "Could you please provide a revised version of my original question to enhance its native English fluency?"
 
-edgePath      := "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
+firefoxPath   := "C:\Users\onajmi\AppData\Local\Mozilla Firefox\firefox.exe"
 codePath      := "C:\Users\onajmi\AppData\Local\Programs\Microsoft VS Code\Code.exe"
 wtPath        := "C:\Users\onajmi\AppData\Local\Microsoft\WindowsApps\wt.exe"
 dataGripPath  := "C:\Program Files\JetBrains\DataGrip 2025.3.2\bin\datagrip64.exe"
@@ -99,7 +99,7 @@ CapsLock & l::Send "{Right}"
 ; App launch / activate
 ; =========================
 
-#w::ActivateOrRun("ahk_exe msedge.exe", edgePath)
+#w::ActivateOrRun("ahk_exe Firefox.exe", firefoxPath)
 #c::ActivateOrRun("ahk_exe Code.exe", codePath)
 
 #t::
@@ -144,6 +144,24 @@ CapsLock & l::Send "{Right}"
 
 ; Win+F -> toggle maximize/restore
 #f::ToggleMaxRestore()
+
+; =========================
+; Explorer-specific hotkeys
+; =========================
+#HotIf WinActive("ahk_class CabinetWClass")
+![::Send "^+{Tab}"
+!]::Send "^{Tab}"
+!w::Send "^w"
+!t::Send "^t"
+!n::Send "^n"
+!l::Send "^l"
+!r::Send "^r"
+!+t::Send "^+t"
+!h::Send "{WheelLeft}"
+!j::Send "{WheelDown}"
+!k::Send "{WheelUp}"
+!;::Send "{WheelRight}"
+#HotIf
 
 ; =========================
 ; Edge-specific hotkeys
@@ -211,6 +229,8 @@ CapsLock & l::Send "{Right}"
 #HotIf WinActive("ahk_exe chrome.exe")
 ![::Send "^+{Tab}"
 !]::Send "^{Tab}"
+!+[::Send "^+{PgUp}"
+!+]::Send "^+{PgDn}"
 !w::Send "^w"
 !t::Send "^t"
 !n::Send "^n"

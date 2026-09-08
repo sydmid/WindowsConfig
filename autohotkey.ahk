@@ -18,7 +18,7 @@ chromePath    := "C:\Program Files\Google\Chrome\Application\chrome.exe"
 postmanPath   := "C:\Users\onajmi\AppData\Local\Postman\Postman.exe"
 abricotinePath:= "C:\Users\onajmi\AppData\Local\Programs\abricotine\Abricotine.exe"
 
-SetCapsLockState "AlwaysOff"
+SetCapsLockState "Off"
 
 ; =========================
 ; Helper functions
@@ -70,14 +70,17 @@ ToggleMaxRestore() {
 ; Ctrl+Shift+X -> paste pre-written text while preserving clipboard
 ^+x::SendTextViaClipboard(preWrittenText)
 
-; Use CapsLock as Escape when tapped
-*CapsLock::
+; Tap CapsLock -> Escape
+; (It fires on release because CapsLock is also used as a combo prefix.)
+CapsLock::Send "{Esc}"
+
+; CapsLock+A -> toggle the actual Caps Lock state
+CapsLock & a::
 {
-    Send "{Blind}{Esc Down}"
-    KeyWait "CapsLock"
-    Send "{Blind}{Esc Up}"
-    if (A_PriorKey = "CapsLock")
-        return
+    if GetKeyState("CapsLock", "T")
+        SetCapsLockState "Off"
+    else
+        SetCapsLockState "On"
 }
 
 ; Disable Alt+Escape
